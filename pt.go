@@ -171,19 +171,6 @@ func (w syncWriter) Write(p []byte) (n int, err error) {
 // Writer to which pluggable transports negotiation messages are written. It
 // defaults to a Writer that writes to os.Stdout and calls Sync after each
 // write.
-//
-// You may, for example, log pluggable transports messages by defining a Writer
-// that logs what is written to it:
-// 	type logWriteWrapper struct {
-// 		io.Writer
-// 	}
-//
-// 	func (w logWriteWrapper) Write(p []byte) (int, error) {
-// 		log.Print(string(p))
-// 		return w.Writer.Write(p)
-// 	}
-// and then redefining Stdout:
-// 	pt.Stdout = logWriteWrapper{pt.Stdout}
 var Stdout io.Writer = syncWriter{os.Stdout}
 
 // Represents an error that can happen during negotiation, for example
